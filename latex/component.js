@@ -27,6 +27,7 @@ export const components = [
   \\end{tabular}
   \\label{tab:measurements}
 \\end{table}`,
+img: "/table/img1.png",
   },
 
   {
@@ -53,15 +54,16 @@ export const components = [
     breaklines=true,
     breakatwhitespace=true,
     showstringspaces=false
-}`,
+    }`,
     code: `\\begin{lstlisting}[caption={Example Python Function},label={lst:example}]
 def calculate_average(numbers):
-    """
+    \"\"\"
     Calculate the average of a list of numbers
-    """
+    \"\"\"
     total = sum(numbers)  # Sum all numbers
     count = len(numbers)  # Get count of numbers
     return total / count  # Return average
 \\end{lstlisting}`,
+img: "/code/img1.png",
   }
 ];

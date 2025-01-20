@@ -42,14 +42,13 @@ interface Component {
   packages?: string[]
   setupCode?: string
   code: string
+  img: string
 }
 
 export default function ComponentsPage() {
   const [selectedCategory, setSelectedCategory] = useState("all")
   const [selectedSubcategory, setSelectedSubcategory] = useState("all")
-  const components: Component[] = rawComponents.map(comp => ({
-    ...comp
-  }));
+  const [components, setComponents] = useState<Component[]>(rawComponents)
 
   const [filteredComponents, setFilteredComponents] = useState<Component[]>(components)
 
@@ -172,7 +171,7 @@ export default function ComponentsPage() {
               )}
 
               {/* Code Preview Toggle */}
-              <CodePreviewToggle code={component.code} />
+              <CodePreviewToggle code={component.code} img={component.img}/>
             </div>
           ))}
         </div>
