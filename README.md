@@ -7,7 +7,7 @@ A modern web application providing reusable LaTeX components and templates for a
 - 📚 Collection of LaTeX components and templates
 - 🌙 Dark/Light mode support
 - 📱 Responsive design
-- ⚡ Built with Next.js 14
+- ⚡ Built with Next.js 15 and React 19
 - 🎨 Styled with Tailwind CSS
 
 ## Tech Stack
