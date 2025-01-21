@@ -72,13 +72,13 @@ export default function Navbar() {
       {/* Mobile Navigation */}
       {isMobile && (
         <div className="px-2 pt-2 pb-3 space-y-1 flex flex-row items-center justify-between">
-          <Link href="/" className="text-xl font-bold mb-2 dark:text-gray-200">
+          <Link href="/" className="text-xl font-bold dark:text-gray-200">
             The Latex Library 
           </Link>
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
               <Button
-                variant="outline"
+                variant="ghost"
                 size="icon"
                 className="h-10 w-10"
                 aria-label="Open main menu"
@@ -101,6 +101,14 @@ export default function Navbar() {
                     {item.name}
                   </Link>
                 ))}
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={toggleDarkMode}
+                  className="w-full flex justify-center"
+                >
+                  {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+              </Button>
               </div>
               
             </SheetContent>
