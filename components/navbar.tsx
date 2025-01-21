@@ -1,9 +1,9 @@
 "use client"
-
+import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import Link from "next/link"
 import { Menu, Sun, Moon } from "lucide-react"
-
+import Logo from "../public/logo.png"
 import { useIsMobile } from "@/hooks/use-mobile"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
@@ -42,7 +42,13 @@ export default function Navbar() {
           <div className="flex justify-between h-16">
             {/* Company Name */}
             <div className="flex-shrink-0 flex items-center">
-              <Link href="/" className="text-xl font-bold dark:text-gray-200">
+              <Link href="/" className="flex gap-4 items-center text-xl font-bold dark:text-gray-200">
+                <Image
+                src={Logo}
+                alt="Logo"
+                width={200}
+                height={200}
+                className="h-12 w-fit"/>
                 The Latex Library 
               </Link>
             </div>
@@ -72,9 +78,15 @@ export default function Navbar() {
       {/* Mobile Navigation */}
       {isMobile && (
         <div className="px-2 pt-2 pb-3 space-y-1 flex flex-row items-center justify-between">
-          <Link href="/" className="text-xl font-bold dark:text-gray-200">
-            The Latex Library 
-          </Link>
+          <Link href="/" className="flex gap-4 items-center text-xl font-bold dark:text-gray-200">
+                <Image
+                src={Logo}
+                alt="Logo"
+                width={200}
+                height={200}
+                className="h-12 w-fit"/>
+                The Latex Library 
+              </Link>
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
               <Button

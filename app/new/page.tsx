@@ -31,7 +31,13 @@ export default function NewComponent() {
                                 </li>
                                 <li className="p-2 bg-gray-100 dark:bg-gray-600 rounded">
                                     <span className="font-semibold">Read Contribution Guide</span>
-                                    <p className="ml-6 mt-2">Read the contribution guide in <code className="bg-gray-200 dark:bg-gray-500 px-2 py-1 rounded">latex/guide.md</code></p>
+                                    <p className="ml-6 mt-2">Read the contribution guide on <Link 
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    href="https://github.com/srothgan/latex-library/blob/main/CONTRIBUTING.md" 
+                                    className="text-blue-600 hover:text-blue-800 dark:text-blue-400 hover:underline">
+                                        GitHub
+                                    </Link>.</p>
                                 </li>
                                 <li className="p-2 bg-gray-100 dark:bg-gray-600 rounded">
                                     <span className="font-semibold">Add Your Component</span>
@@ -39,9 +45,9 @@ export default function NewComponent() {
                                         <code className="block bg-gray-200 dark:bg-gray-500 p-2 mt-2 rounded">
                                             latex/<br/>
                                             ├── components/<br/>
-                                            ├── images/<br/>
                                             ├── categories.js<br/>
-                                            └── guide.md
+                                            public/<br/>
+                                            └── images/<br/>
                                         </code>
                                     </p>
                                 </li>

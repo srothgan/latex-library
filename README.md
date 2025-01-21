@@ -20,3 +20,5 @@ A modern web application providing reusable LaTeX components and templates for a
 ## License
 The project and all its contents are under the MIT License.
 
+## Contributing
+We welcome contributions! See the [Contributing Guide](CONTRIBUTING.md) for details.
