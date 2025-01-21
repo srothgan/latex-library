@@ -2,7 +2,7 @@
 import Link from "next/link"
 import { useState, useEffect } from "react"
 import { categories } from "@/latex/categories"
-import { components as rawComponents } from "@/latex/component"
+import { getComponents } from "@/utils/getComponents"
 import { Copy} from "lucide-react"
 import { CodePreviewToggle } from "@/components/codePreviewToggle"
 import {
@@ -11,7 +11,7 @@ import {
     AccordionItem,
     AccordionTrigger,
   } from "@/components/ui/accordion"
-  import {
+import {
     Select,
     SelectContent,
     SelectGroup,
@@ -20,38 +20,19 @@ import {
     SelectTrigger,
     SelectValue,
   } from "@/components/ui/select"
-// Add TypeScript interfaces
-interface Subcategory {
-  [key: string]: string
-}
 
-interface Category {
-  name: string
-  description: string
-  subcategories: Subcategory
-}
-
-interface Categories {
-  [key: string]: Category
-}
-
-interface Component {
-  name: string
-  description: string
-  category: string
-  subcategory: string
-  packages?: string[]
-  setupCode?: string
-  code: string
-  img: string
-}
+import type { Component } from "@/utils/getComponents"
 
 export default function ComponentsPage() {
   const [selectedCategory, setSelectedCategory] = useState("all")
-  const [selectedSubcategory, setSelectedSubcategory] = useState("all")
-  const [components, setComponents] = useState<Component[]>(rawComponents)
+  const [components, setComponents] = useState<Component[]>([])
+  const [filteredComponents, setFilteredComponents] = useState<Component[]>([])
 
-  const [filteredComponents, setFilteredComponents] = useState<Component[]>(components)
+  useEffect(() => {
+    const loadedComponents = getComponents()
+    setComponents(loadedComponents)
+    setFilteredComponents(loadedComponents)
+  }, [])
 
   // Filter components based on selection
   useEffect(() => {
@@ -59,29 +40,19 @@ export default function ComponentsPage() {
     if (selectedCategory !== "all") {
       filtered = components.filter((comp) => comp.category === selectedCategory)
     }
-    if (selectedSubcategory !== "all") {
-      filtered = filtered.filter((comp) => comp.subcategory === selectedSubcategory)
-    }
     setFilteredComponents(filtered)
-  }, [selectedCategory, selectedSubcategory])
+  }, [selectedCategory, components])
 
-  // Fix the subcategories mapping
-  const getSubcategories = (category: string) => {
-    const selectedCat = (categories as Categories)[category]
-    return selectedCat ? Object.entries(selectedCat.subcategories) : []
-  }
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row gap-4 mb-8 md:justify-between">
         {/* Filter Section */}
-        <div className="flex flex-col md:flex-row gap-4">
-        <Select
+        <div className="flex flex-col md:flex-row mb-8 md:justify-between items-center">
+          <Select
             value={selectedCategory}
             onValueChange={(value) => {
               setSelectedCategory(value)
-              setSelectedSubcategory("all")
             }}
           >
             <SelectTrigger className="w-full md:w-[250px] bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-70">
@@ -97,23 +68,7 @@ export default function ComponentsPage() {
             </SelectContent>
           </Select>
 
-          {selectedCategory !== "all" && (
-            <Select value={selectedSubcategory} onValueChange={(value) => setSelectedSubcategory(value)}>
-              <SelectTrigger className="w-full md:w-[250px] bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-70">
-                <SelectValue placeholder="Select a subcategory" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Subcategories</SelectItem>
-                {getSubcategories(selectedCategory).map(([key, name]) => (
-                  <SelectItem key={key} value={key}>
-                    {name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          )}
-          </div>
-          <Link href="new" className="w-full md:w-[250px] bg-blue-600 text-white text-center py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 dark:bg-blue-500 dark:hover:bg-blue-600">
+          <Link href="/new" className="w-full md:w-[250px] bg-blue-600 text-white text-center py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 dark:bg-blue-500 dark:hover:bg-blue-600">
               Add new Component
           </Link>
           

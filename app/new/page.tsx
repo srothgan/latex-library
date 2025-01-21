@@ -39,9 +39,10 @@ export default function NewComponent() {
                                         <code className="block bg-gray-200 dark:bg-gray-500 p-2 mt-2 rounded">
                                             latex/<br/>
                                             ├── components/<br/>
-                                            ├── images/<br/>
                                             ├── categories.js<br/>
-                                            └── GUIDE.md
+                                            └── GUIDE.md<br/>
+                                            public/<br/>
+                                            └── images/<br/>
                                         </code>
                                     </p>
                                 </li>
